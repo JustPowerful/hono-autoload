@@ -10,5 +10,6 @@
   },
   "dependencies": {
     "hono": "^4.6.5"
-  }
+  },
+  "version": "0.1.0"
 }
