@@ -1,7 +1,7 @@
-import { Hono } from "hono";
-import { join } from "path";
-import type { AutoLoadMiddleware } from "../types";
-import { readdir } from "fs/promises";
+import { Hono } from 'hono';
+import { join } from 'path';
+import { AutoLoadMiddleware } from '../types';
+import { readdir } from 'fs/promises';
 
 export const createAutoloaderMiddleware: (
   app: Hono,
@@ -11,7 +11,7 @@ export const createAutoloaderMiddleware: (
     const loadMiddleware = async () => {
       const files = await readdir(join(middlewareDir));
       for (const file of files) {
-        if (file.endsWith(".ts") || file.endsWith(".js")) {
+        if (file.endsWith('.ts') || file.endsWith('.js')) {
           const fullPath = join(middlewareDir, file);
 
           console.log(`[Debug] Attempting to import: ${fullPath}`);
@@ -24,7 +24,7 @@ export const createAutoloaderMiddleware: (
               throw new Error(`Invalid middleware module in file: ${file}`);
             }
 
-            if (middlewareModule.matcher && middlewareModule.matcher !== "*") {
+            if (middlewareModule.matcher && middlewareModule.matcher !== '*') {
               console.log(
                 `[Info] Loaded middleware: ${middlewareModule.matcher} from ${file}`
               );
@@ -42,9 +42,9 @@ export const createAutoloaderMiddleware: (
         }
       }
     };
-    console.log("[Info] Loading middlewares from: " + middlewareDir);
+    console.log('[Info] Loading middlewares from: ' + middlewareDir);
     await loadMiddleware();
   } catch (error) {
-    console.error("[Err] Error loading middlewares: ", error);
+    console.error('[Err] Error loading middlewares: ', error);
   }
 };

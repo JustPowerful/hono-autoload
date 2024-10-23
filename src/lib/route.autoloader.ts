@@ -1,9 +1,9 @@
-import type { Hono } from "hono";
-import { join } from "path";
-import { readdir } from "fs/promises";
+import { Hono } from 'hono';
+import { join } from 'path';
+import { readdir } from 'fs/promises';
 
 // types
-import type { AutoLoadRoute } from "../types";
+import { AutoLoadRoute } from '../types';
 
 export const createAutoloader: (
   app: Hono,
@@ -13,7 +13,7 @@ export const createAutoloader: (
     const loadRoutes = async () => {
       const files = await readdir(join(routesDir));
       for (const file of files) {
-        if (file.endsWith(".ts") || file.endsWith(".js")) {
+        if (file.endsWith('.ts') || file.endsWith('.js')) {
           const fullPath = join(routesDir, file);
 
           console.log(`[Debug] Attempting to import: ${fullPath}`);
@@ -39,9 +39,9 @@ export const createAutoloader: (
         }
       }
     };
-    console.log("[Info] Loading routes from: " + routesDir);
+    console.log('[Info] Loading routes from: ' + routesDir);
     await loadRoutes();
   } catch (error) {
-    console.error("[Err] Error loading routes: ", error);
+    console.error('[Err] Error loading routes: ', error);
   }
 };
