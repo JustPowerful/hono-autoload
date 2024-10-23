@@ -7,16 +7,16 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        # Updated Node versions to newer, ARM64-compatible versions
-        node: ['16.x', '18.x', '20.x']
+        # Only using Node versions compatible with @size-limit/esbuild
+        node: ['18.x', '20.x']
         os: [ubuntu-latest, windows-latest, macOS-latest]
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4 # Updated to v4
 
       - name: Use Node ${{ matrix.node }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4 # Updated to v4
         with:
           node-version: ${{ matrix.node }}
 
